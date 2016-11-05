@@ -1,0 +1,24 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">
+            <span class='label label-danger'>{{poll.title}}</span> - {{poll.question}}
+        </h1>
+    </div>
+    <div class='panel-body'>
+        <div ng-repeat="vote in votes">
+            <strong>{{vote.answer}}</strong> - {{vote.Count}} Votes<span class="pull-right">{{vote.Count/total * 100 | number:0}}%</span>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{vote.Count/total * 100 | number:0}}%"></div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button type="button" class="btn btn-success"ng-click='deleteVotes()'>Reset Votes</button>
+    </div>
+</div>
+
+<div>
+    <a href="#/admin">
+        <button type='button' class='btn btn-default'>Back to polls</button>
+    </a>
+</div>
