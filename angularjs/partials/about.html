@@ -1,0 +1,151 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Overview</h3>
+    </div>
+    <div class="panel-body">
+        <p>
+            This app was made by myself, Mathew Hylkema for SENG365 assignment 2. It is a simple MVVM web application for viewing polls. It makes use of AngularJS to provide a interactive, responsive front end client and RESTful web services for all database related requests.
+        </p>
+        <h3>Features</h3>
+        <ul class="list-group panel-body">
+            <li class="list-group-item">
+                <a href="#/polls">View Polls</a>
+            </li>
+            <li class="list-group-item">
+                <a href="#polls/1">Vote on Polls and View Votes</a>
+                - Note: Link wont work if no polls in database.
+            </li>
+            <li class="list-group-item">
+                <a href="#/admin">Administer Polls</a> - From here you can reset poll votes, and add and remove polls.
+            </li>
+            <li class="list-group-item">
+                <a href="#/about">About Page</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Styling</h3>
+    </div>
+    <div class="panel-body">
+        <p>
+            This website uses <a href="http://getbootstrap.com/getting-started/">Bootstrap</a> 
+            for almost all of it's css. I chose to use bootstrap as it provides a tidy design 
+            while being easy to implement. I implemented a background image to give the website 
+            a stylish look. For the navbar implementation, I based it off an example on the 
+            <a href="http://getbootstrap.com/examples/justified-nav/#">bootstrap website</a>.
+        </p>
+    </div>
+</div>
+
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title">REST API</h3>
+    </div>
+    <div class="panel-body">
+        In all cases theprogram should respond with a 404 if something goes wrong or a 20X if everything is correct. 
+        I was able to implement poll creation and deletion as 'extra features' but did not get around to adding poll
+        edit functionality.<br> The REST services provided by this program can be accessed by <b>http://csse-studweb3.canterbury.ac.nz/~mjh300/365/polls/index.php/services/{query}</b><br> 
+        In the following section I will refer to this URI up until {query} as {BASEURI} as it is the base URI for all RESTful services.
+        <br><br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Service URL</th>
+                    <th>Method</th>
+                    <th>Request_Data</th>
+                    <th>Response_Data</th>
+                    <th>Explanation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{BASEURI}/polls</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        200 OK and a JSON list of polls.
+                        Each poll is a JSON object with an id, title, question and a list of answers
+                    </td>
+                    <td>Gets a list of all available polls</td>
+                </tr>
+                <tr>
+                    <td>{BASEURI}/polls/{pollId}</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        200 OK and a JSON object representing the poll
+                        with the specified id. JSON object consists of poll id,
+                        title, question and a list of answer objects - each
+                        consisting of an id, answer and associated poll id.
+                        If the id doesn't represent a valid poll a 404 will 
+                        be returned.
+                    </td>
+                    <td>Gets a specific poll</td>
+                </tr>
+                <tr>
+                    <td>{BASEURI}/polls</td>
+                    <td>POST</td>
+                    <td>A JSON object representing the poll to create</td>
+                    <td>
+                        201 CREATED and a Location header with link to the new poll if the poll was successfully created or a
+                        404 if something went wrong
+                    </td>
+                    <td>Creates a new poll</td>
+                </tr>
+                <tr>
+                    <td>{BASEURI}/polls/{pollId}</td>
+                    <td>DELETE</td>
+                    <td>None</td>
+                    <td>
+                        200 OK
+                    </td>
+                    <td>Deletes an existing poll.</td>
+                </tr>
+                <tr>
+                    <td>{BASEURI}/votes/{pollId}/{answerNo}</td>
+                    <td>POST</td>
+                    <td>None</td>
+                    <td>200 OK if the vote was successful or 404 if the poll or option does not exist</td>
+                    <td>Votes for an answer within a poll. {pollId} is the id of the poll to vote for
+                    and {answerNo} is the answer within the poll to vote for</td>
+                </tr>
+                <tr>
+                    <td>{BASEURI}/votes/{pollId}</td>
+                    <td>GET</td>
+                    <td>None</td>
+                    <td>
+                        200 OK and a JSON object consisting of a list of answers, each having an id, an answer, associated poll id and count - being the number of votes for this answer. 
+                    </td>
+                    <td>Gets a list of all votes within a poll. {pollId} is the id
+                    of the poll to get votes for</td>
+                </tr>
+                <tr>
+                    <td>{BASEURI}/votes/{pollId}</td>
+                    <td>DELETE</td>
+                    <td>None</td>
+                    <td>
+                        200 OK
+                    </td>
+                    <td>Resets the votes on a poll. {pollId} is the id of the poll to reset</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h3 class="panel-title">External Libraries</h3>
+    </div>
+    <ul class="list-group panel-body">
+        <li class="list-group-item">
+            <a href="http://getbootstrap.com/getting-started/">Bootstrap</a> used for styling.
+        </li>
+        <li class="list-group-item">
+            <a href="https://angularjs.org/">Angular.js</a> used for making a responsive website.
+        </li>
+    </ul>
+</div>
